@@ -17,6 +17,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="security_fail">The application have authority issue, please download the application\'s latest version from Google store!</string>
 
     <!-- Main page strings -->
     <string name="main_title">Employee</string>

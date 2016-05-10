@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.ye1chen.scudsbook_deliver_client.R;
 import com.example.ye1chen.scudsbook_deliver_client.orderpage.OrderPage;
+import com.google.android.gms.maps.MapFragment;
 
 /**
  * Created by ye1.chen on 4/27/16.
@@ -19,6 +21,7 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
 
     private Spinner mSpinner;
     private ListView mListView;
+    private LinearLayout mMapView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,7 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
         setContentView(R.layout.activity_main_page);
         setSpinner();
         setListView();
+        setMapView();
     }
 
     private void setSpinner() {
@@ -45,6 +49,18 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (position) {
+            case 0:
+                setViewVisible(true,false);
+                break;
+            case 1:
+                break;
+            case 2:
+                setViewVisible(false,true);
+                break;
+            default:
+                break;
+        }
 
     }
 
@@ -56,5 +72,15 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         startActivity(new Intent(MainPage.this, OrderPage.class));
+    }
+
+    private void setViewVisible(boolean listStae, boolean mapState) {
+        mListView.setVisibility(listStae? View.VISIBLE : View.GONE);
+        mMapView.setVisibility(mapState? View.VISIBLE : View.GONE);
+
+    }
+
+    private void setMapView() {
+        mMapView = (LinearLayout) findViewById(R.id.mapview);
     }
 }

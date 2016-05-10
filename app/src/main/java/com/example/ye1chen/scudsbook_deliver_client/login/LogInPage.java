@@ -1,9 +1,5 @@
 package com.example.ye1chen.scudsbook_deliver_client.login;
 
-/**
- * Created by ye1.chen on 4/26/16.
- */
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -37,44 +33,13 @@ import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
-import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ye1chen.scudsbook_deliver_client.HttpConnection;
 import com.example.ye1chen.scudsbook_deliver_client.R;
+import com.example.ye1chen.scudsbook_deliver_client.ScudsbookConstants;
 import com.example.ye1chen.scudsbook_deliver_client.mainpage.MainPage;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
@@ -323,7 +288,6 @@ public class LogInPage extends AppCompatActivity implements LoaderManager.Loader
         };
 
         int ADDRESS = 0;
-        int IS_PRIMARY = 1;
     }
 
     /**
@@ -336,15 +300,16 @@ public class LogInPage extends AppCompatActivity implements LoaderManager.Loader
         private final String mPassword;
         private HashMap<String,String> mMap;
         private Context mContext;
+        private String respond = null;
 
         UserLoginTask(String email, String password, Context context) {
             mEmail = email;
             mPassword = password;
             mContext = context;
-            mMap = new HashMap<String, String>();
-            mMap.put("_key_scudsbook", mContext.getResources().getString(R.string.key_connection));
-            mMap.put("_user_name", mEmail);
-            mMap.put("_password", mPassword);
+            mMap = new HashMap<>();
+            mMap.put(ScudsbookConstants.key_scudsbook, mContext.getResources().getString(R.string.key_connection));
+            mMap.put(ScudsbookConstants.user_name, mEmail);
+            mMap.put(ScudsbookConstants.password, mPassword);
         }
 
         @Override
@@ -353,14 +318,9 @@ public class LogInPage extends AppCompatActivity implements LoaderManager.Loader
             String result = mConnection.makeLocationPostRequest(mMap);
 
             String[] results = result.split(",");
-            if(TextUtils.equals(results[0], "result_account_exist")) {
-                if(TextUtils.equals(results[1],mPassword)) {
-                    return true;
-                }
-            } else if(TextUtils.equals(results[0], "result_account_login")) {
-                return true;
-            }
-            return false;
+            respond = results[0];
+            return (TextUtils.equals(respond, ScudsbookConstants.result_account_login)
+                    || (TextUtils.equals(respond, ScudsbookConstants.result_account_exist) && TextUtils.equals(results[1],mPassword)));
         }
 
         @Override
@@ -369,8 +329,12 @@ public class LogInPage extends AppCompatActivity implements LoaderManager.Loader
             showProgress(false);
 
             if (success) {
-                startActivity(new Intent(LogInPage.this, MainPage.class));
+                startActivity(new Intent(mContext, MainPage.class));
             } else {
+                if(TextUtils.equals(respond, ScudsbookConstants.error_security_fail)){
+                    Toast.makeText(mContext, mContext.getResources().getString(R.string.security_fail), Toast.LENGTH_LONG).show();
+                    finish();
+                }
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
