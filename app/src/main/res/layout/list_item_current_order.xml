@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/order_text_style"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:gravity="center"
+        android:text="Delivering by Ye Chen"
+        android:id="@+id/textView8" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/order_text_style"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="# 999999"
+            android:layout_weight="1"
+            android:id="@+id/textView2" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/order_text_style"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="04/28/2016 14:00 ~ 14:30"
+            android:layout_weight="2"
+            android:id="@+id/textView3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/order_text_style"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Xiaohui Hu"
+            android:layout_weight="1"
+            android:id="@+id/textView4" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/order_text_style"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="7738226821"
+            android:layout_weight="1"
+            android:id="@+id/textView5" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/order_text_style"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="5.1 miles"
+            android:layout_weight="1"
+            android:id="@+id/textView6" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/order_text_style"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="14418 29th road, flushing 11254"
+        android:id="@+id/textView7" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/order_text_style"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="$54(Products) + $5.34(Deliver) + $5.4(Tips) = $64.74"
+        android:id="@+id/textView9" />
+</LinearLayout>

@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="order_text_style">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingTop">@dimen/list_margin</item>
+        <item name="android:paddingBottom">@dimen/list_margin</item>
+        <item name="android:paddingRight">@dimen/list_margin</item>
+        <item name="android:paddingLeft">@dimen/order_liest_left_padding</item>
+    </style>
 </resources>
