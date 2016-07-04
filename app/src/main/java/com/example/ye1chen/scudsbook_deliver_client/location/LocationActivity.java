@@ -1,4 +1,4 @@
-package com.example.ye1chen.scudsbook_deliver_client;
+package com.example.ye1chen.scudsbook_deliver_client.location;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.ye1chen.scudsbook_deliver_client.R;
+
 /**
  * Created by ye1.chen on 2/23/16.
  */
@@ -23,8 +25,8 @@ public class LocationActivity extends Activity implements View.OnClickListener{
     private TextView mLatLan;
     private LocationManager mLocationManager;
 
-    private static final long LOCATION_UPDATE_MIN_TIME = 1000; // 1 second
-    private static final long LOCATION_UPDATE_MIN_DISTANCE = 2; // 2 meters
+    private static final long LOCATION_UPDATE_MIN_TIME = 5000; // 5 second
+    private static final long LOCATION_UPDATE_MIN_DISTANCE = 5; // 5 meters
 
     private PowerManager.WakeLock wl;
 

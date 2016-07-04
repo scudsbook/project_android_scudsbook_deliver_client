@@ -39,6 +39,7 @@ import android.widget.Toast;
 import com.example.ye1chen.scudsbook_deliver_client.HttpConnection;
 import com.example.ye1chen.scudsbook_deliver_client.R;
 import com.example.ye1chen.scudsbook_deliver_client.ScudsbookConstants;
+import com.example.ye1chen.scudsbook_deliver_client.UserInfo;
 import com.example.ye1chen.scudsbook_deliver_client.mainpage.MainPage;
 
 /**
@@ -60,13 +61,11 @@ public class LogInPage extends AppCompatActivity implements LoaderManager.Loader
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    private HttpConnection mConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mConnection = new HttpConnection();
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -308,6 +307,7 @@ public class LogInPage extends AppCompatActivity implements LoaderManager.Loader
             mContext = context;
             mMap = new HashMap<>();
             mMap.put(ScudsbookConstants.key_scudsbook, mContext.getResources().getString(R.string.key_connection));
+            mMap.put(ScudsbookConstants.key_type, ScudsbookConstants.type_user_request);
             mMap.put(ScudsbookConstants.user_name, mEmail);
             mMap.put(ScudsbookConstants.password, mPassword);
         }
@@ -315,12 +315,25 @@ public class LogInPage extends AppCompatActivity implements LoaderManager.Loader
         @Override
         protected Boolean doInBackground(Void... params) {
 
-            String result = mConnection.makeLocationPostRequest(mMap);
+            String result = HttpConnection.postRequest(mMap, 10000, 15000);
 
             String[] results = result.split(",");
             respond = results[0];
-            return (TextUtils.equals(respond, ScudsbookConstants.result_account_login)
-                    || (TextUtils.equals(respond, ScudsbookConstants.result_account_exist) && TextUtils.equals(results[1],mPassword)));
+            boolean state = TextUtils.equals(respond, ScudsbookConstants.result_account_login)
+                    || (TextUtils.equals(respond, ScudsbookConstants.result_account_exist) && TextUtils.equals(results[1],mPassword));
+
+            if(state) {
+                HashMap<String, String> tempMap = new HashMap<>();
+                tempMap.put(ScudsbookConstants.key_scudsbook, mContext.getResources().getString(R.string.key_connection));
+                tempMap.put(ScudsbookConstants.key_type, ScudsbookConstants.type_admin_key);
+                tempMap.put(ScudsbookConstants.user_name, mEmail);
+                String tempResult = HttpConnection.postRequest(tempMap, 10000, 15000);
+                if(TextUtils.equals(tempResult, ScudsbookConstants.admin_key)) {
+                    UserInfo.getInstance(mContext).setManagerCheck(true);
+                }
+                UserInfo.getInstance(mContext).setUserName(mEmail);
+            }
+            return state;
         }
 
         @Override

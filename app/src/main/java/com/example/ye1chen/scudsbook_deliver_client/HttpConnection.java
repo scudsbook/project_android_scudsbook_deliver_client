@@ -28,15 +28,15 @@ public class HttpConnection {
     private static final String URL_SERVER = "http://scudsbook.x10host.com/BackServer/Server_Scudsbook_User_Handler.php";
     private static int respCode = -1;
 
-    public String makeLocationPostRequest(HashMap<String, String> postDataParams) {
+    public static String postRequest(HashMap<String, String> postDataParams, int readTimeout, int connectTimeout) {
         String response = "";
         try {
             URL url = new URL(URL_SERVER);
 
             HttpURLConnection httpUrlConnection = (HttpURLConnection) url.openConnection();
             httpUrlConnection.setChunkedStreamingMode(0);
-            httpUrlConnection.setReadTimeout(10000);
-            httpUrlConnection.setConnectTimeout(15000);
+            httpUrlConnection.setReadTimeout(readTimeout);
+            httpUrlConnection.setConnectTimeout(connectTimeout);
             httpUrlConnection.setDoInput(true);
             httpUrlConnection.setDoOutput(true);
             httpUrlConnection.setRequestMethod("POST");
@@ -62,25 +62,14 @@ public class HttpConnection {
             else {
                 response="";
             }
+            httpUrlConnection.disconnect();
         } catch (Exception e) {
-            Log.e(this.getClass().toString(), "Error in parsing IMPACT response: \n" + Log.getStackTraceString(e));
+            Log.e("HttpConnection", "Error in parsing IMPACT response: \n" + Log.getStackTraceString(e));
         }
         return response;
     }
 
-    private static String readString(InputStream responseStream) throws IOException {
-        BufferedReader responseStreamReader = new BufferedReader(new InputStreamReader(
-                responseStream));
-        String line = "";
-        StringBuilder stringBuilder = new StringBuilder();
-        while ((line = responseStreamReader.readLine()) != null) {
-            stringBuilder.append(line).append("\n");
-        }
-        responseStreamReader.close();
-        return stringBuilder.toString();
-    }
-
-    private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
+    private static String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;
         for(Map.Entry<String, String> entry : params.entrySet()){
