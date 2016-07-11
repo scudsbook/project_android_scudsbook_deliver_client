@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView10"
+        style="@style/order_text_style"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/new_order_title"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:scrollbars="vertical">
+
+        <TableLayout
+            android:id="@+id/tl_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1">
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_order_name"
+                    style="@style/add_order_text_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/customer_name" />
+
+                <EditText
+                    android:id="@+id/ed_order_name"
+                    style="@style/add_order_edit_text_style"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPostalAddress"
+                    android:scrollHorizontally="true" />
+
+                <requestFocus />
+            </TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divid_alarm_1" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_order_phone"
+                    style="@style/add_order_text_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/customer_phone" />
+
+                <EditText
+                    android:id="@+id/ed_order_phone"
+                    style="@style/add_order_edit_text_style"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="phone"
+                    android:scrollHorizontally="true" />
+            </TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divid_alarm_1" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_order_distance"
+                    style="@style/add_order_text_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/distance" />
+
+                <EditText
+                    android:id="@+id/ed_order_distance"
+                    style="@style/add_order_edit_text_style"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:scrollHorizontally="true" />
+            </TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divid_alarm_1" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_order_address"
+                    style="@style/add_order_text_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/address" />
+
+                <EditText
+                    android:id="@+id/ed_order_address"
+                    style="@style/add_order_edit_text_style"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:scrollHorizontally="true" />
+            </TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divid_alarm_1" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_order_city"
+                    style="@style/add_order_text_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/city" />
+
+                <EditText
+                    android:id="@+id/ed_order_city"
+                    style="@style/add_order_edit_text_style"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:scrollHorizontally="true" />
+            </TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divid_alarm_1" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_order_zip"
+                    style="@style/add_order_text_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/zip" />
+
+                <EditText
+                    android:id="@+id/ed_order_zip"
+                    style="@style/add_order_edit_text_style"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:scrollHorizontally="true" />
+            </TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divid_alarm_1" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_order_product_cost"
+                    style="@style/add_order_text_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/product_price" />
+
+                <EditText
+                    android:id="@+id/ed_order_product_cost"
+                    style="@style/add_order_edit_text_style"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:scrollHorizontally="true" />
+            </TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divid_alarm_1" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_order_deliver_fee"
+                    style="@style/add_order_text_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/deliver_fee" />
+
+                <EditText
+                    android:id="@+id/ed_order_deliver_fee"
+                    style="@style/add_order_edit_text_style"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:scrollHorizontally="true" />
+            </TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divid_alarm_1" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_order_tip"
+                    style="@style/add_order_text_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/tip" />
+
+                <EditText
+                    android:id="@+id/ed_order_tip"
+                    style="@style/add_order_edit_text_style"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:inputType="numberDecimal"
+                    android:scrollHorizontally="true" />
+            </TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divid_alarm_1" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_order_total"
+                    style="@style/add_order_text_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/total" />
+
+                <EditText
+                    android:id="@+id/ed_order_total"
+                    style="@style/add_order_edit_text_style"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:inputType="numberDecimal"
+                    android:scrollHorizontally="true"
+                    android:enabled="false"/>
+            </TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divid_alarm_1" />
+        </TableLayout>
+    </ScrollView>
+</LinearLayout>

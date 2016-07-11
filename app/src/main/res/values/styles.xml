@@ -15,4 +15,18 @@
         <item name="android:paddingRight">@dimen/list_margin</item>
         <item name="android:paddingLeft">@dimen/order_liest_left_padding</item>
     </style>
+
+    <style name="add_order_text_style" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/list_margin</item>
+        <item name="android:layout_height">@dimen/tb_row_hight</item>
+    </style>
+
+    <style name="add_order_edit_text_style">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/list_margin</item>
+        <item name="android:layout_height">@dimen/tb_row_hight</item>
+    </style>
 </resources>

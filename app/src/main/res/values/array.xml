@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="list_of_view_selector">
+    <string-array name="list_of_view_selector_employee">
         <item>@string/main_current_list</item>
         <item>@string/main_order_history</item>
         <item>@string/main_map_view</item>
     </string-array>
 
+    <string-array name="list_of_view_selector_manager">
+        <item>@string/main_add_order</item>
+        <item>@string/main_current_list</item>
+        <item>@string/main_order_history</item>
+        <item>@string/main_map_view</item>
+    </string-array>
 </resources>
