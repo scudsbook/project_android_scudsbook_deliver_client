@@ -36,9 +36,11 @@
     <string name="distance">Distance</string>
     <string name="address">Address</string>
     <string name="city">City</string>
+    <string name="state">State</string>
     <string name="zip">Zip Code</string>
     <string name="product_price">Product Cost</string>
     <string name="deliver_fee">Deliver Fee</string>
     <string name="tip">Tip</string>
     <string name="total">Total</string>
+    <string name="add_submit">Submit</string>
 </resources>

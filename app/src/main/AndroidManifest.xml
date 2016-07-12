@@ -51,8 +51,9 @@
 
         </activity>
         <activity android:name=".orderpage.OrderPage">
-
         </activity>
+
+        <activity android:name=".orderpage.ManagerAddNewOrder"/>
     </application>
 
 </manifest>

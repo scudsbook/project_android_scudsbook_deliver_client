@@ -112,7 +112,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
+                    android:inputType="textPostalAddress"
                     android:scrollHorizontally="true" />
             </TableRow>
 
@@ -135,7 +135,30 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
+                    android:inputType="textPostalAddress"
+                    android:scrollHorizontally="true" />
+            </TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divid_alarm_1" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_order_state"
+                    style="@style/add_order_text_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/state" />
+
+                <EditText
+                    android:id="@+id/ed_order_state"
+                    style="@style/add_order_edit_text_style"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPostalAddress"
                     android:scrollHorizontally="true" />
             </TableRow>
 
@@ -158,7 +181,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:scrollHorizontally="true" />
             </TableRow>
 
@@ -257,6 +280,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/divid_alarm_1" />
+            <Button
+                android:id="@+id/bt_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_submit" />
         </TableLayout>
     </ScrollView>
 </LinearLayout>
