@@ -24,7 +24,7 @@ public class ScudsbookDbUtil {
         values.put(OrderInfoColumns.TIP, orderInfo.getTip());
         values.put(OrderInfoColumns.TOTAL, orderInfo.getTotal());
     }
-
+/*
     public static void fromCursor(Cursor cursor, OrderInfo profile) {
         int idxId = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns._ID);
         int idxOrderId = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.ORDER_ID);
@@ -53,5 +53,5 @@ public class ScudsbookDbUtil {
         profile.setOrderCost(cursor.getString(idxCost));
         profile.setAvailableCost(cursor.getString(idxPartCost));
         profile.setPaymentFrom(cursor.getString(idxPaymentFrom));
-    }
+    }*/
 }

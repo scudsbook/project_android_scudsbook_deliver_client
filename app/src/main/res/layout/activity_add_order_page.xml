@@ -10,6 +10,8 @@
         style="@style/order_text_style"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/color_background"
+        android:textColor="@android:color/white"
         android:layout_weight="1"
         android:gravity="center"
         android:text="@string/new_order_title"
@@ -284,6 +286,8 @@
                 android:id="@+id/bt_submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/color_background"
+                android:textColor="@android:color/white"
                 android:text="@string/add_submit" />
         </TableLayout>
     </ScrollView>

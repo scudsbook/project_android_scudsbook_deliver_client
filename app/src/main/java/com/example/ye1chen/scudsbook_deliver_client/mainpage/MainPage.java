@@ -17,6 +17,7 @@ import com.example.ye1chen.scudsbook_deliver_client.R;
 import com.example.ye1chen.scudsbook_deliver_client.ScudsbookConstants;
 import com.example.ye1chen.scudsbook_deliver_client.UserInfo;
 import com.example.ye1chen.scudsbook_deliver_client.location.LocationDetector;
+import com.example.ye1chen.scudsbook_deliver_client.orderpage.ManagerAddNewOrder;
 import com.example.ye1chen.scudsbook_deliver_client.orderpage.OrderPage;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -58,7 +59,7 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
     private void setSpinner() {
         mSpinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.list_of_view_selector, android.R.layout.simple_spinner_item);
+                R.array.list_of_view_selector_manager, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(adapter);
         mSpinner.setOnItemSelectedListener(this);
@@ -74,11 +75,14 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
             case 0:
-                setViewVisible(true,false);
+                startActivity(new Intent(MainPage.this, ManagerAddNewOrder.class));
                 break;
             case 1:
+                setViewVisible(true,false);
                 break;
             case 2:
+                break;
+            case 3:
                 setViewVisible(false,true);
                 break;
             default:
