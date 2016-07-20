@@ -23,35 +23,42 @@ public class ScudsbookDbUtil {
         values.put(OrderInfoColumns.DELIVERED_FEE, orderInfo.getDeliverFee());
         values.put(OrderInfoColumns.TIP, orderInfo.getTip());
         values.put(OrderInfoColumns.TOTAL, orderInfo.getTotal());
+        values.put(OrderInfoColumns.DELIVER_BY, orderInfo.getDeliverBy());
+        values.put(OrderInfoColumns.ORDER_TIME, orderInfo.getOrderTime());
+        values.put(OrderInfoColumns.SUMMARY, orderInfo.getOrderSum());
     }
-/*
-    public static void fromCursor(Cursor cursor, OrderInfo profile) {
-        int idxId = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns._ID);
-        int idxOrderId = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.ORDER_ID);
-        int idxDate = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.ORDER_DATE);
-        int idxStore = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.ORDER_STORE);
-        int idxDetail = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.ORDER_DETAIL);
-        int idxCashbackCompany = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.ORDER_CASHBACK_COMPANY);
-        int idxCashbackState = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.ORDER_CASHBACK_STATE);
-        int idxCashbackPercent = cursor.getColumnIndexOrThrow(AAProvider.ProfileColumns.ORDER_CASHBACK_PERCENT);
-        int idxCashbackAmount = cursor.getColumnIndexOrThrow(AAProvider.ProfileColumns.ORDER_CASHBACK_AMOUNT);
-        int idxCategory = cursor.getColumnIndexOrThrow(AAProvider.ProfileColumns.ORDER_CATEGORY);
-        int idxCost = cursor.getColumnIndexOrThrow(AAProvider.ProfileColumns.ORDER_TOTAL_COST);
-        int idxPartCost = cursor.getColumnIndexOrThrow(AAProvider.ProfileColumns.ORDER_PRICE_CB_AVAILABLE);
-        int idxPaymentFrom = cursor.getColumnIndexOrThrow(AAProvider.ProfileColumns.ORDER_PAYMENT_FROM);
 
-        profile.setId(cursor.getString(idxId));
-        profile.setOrderId(cursor.getString(idxOrderId));
-        profile.setDate(cursor.getString(idxDate));
-        profile.setOrderStore(cursor.getString(idxStore));
-        profile.setOrderDetail(cursor.getString(idxDetail));
-        profile.setCashbackCompany(cursor.getString(idxCashbackCompany));
-        profile.setCashbackState(cursor.getString(idxCashbackState));
-        profile.setCashbackPercent(cursor.getString(idxCashbackPercent));
-        profile.setCashbackAmount(cursor.getString(idxCashbackAmount));
-        profile.setCat(cursor.getString(idxCategory));
-        profile.setOrderCost(cursor.getString(idxCost));
-        profile.setAvailableCost(cursor.getString(idxPartCost));
-        profile.setPaymentFrom(cursor.getString(idxPaymentFrom));
-    }*/
+    public static void fromCursor(Cursor cursor, OrderInfo info) {
+        int idxId = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns._ID);
+        int idxCustomerName = cursor.getColumnIndexOrThrow(OrderInfoColumns.CUSTOMER_NAME);
+        int idxCustomerPhone = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.CUSTOMER_PHONE);
+        int idxDistance = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.DISTANCE);
+        int idxAddress = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.ADDRESS);
+        int idxCity = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.CITY);
+        int idxState = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.STATE);
+        int idxZip = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.ZIP);
+        int idxProductCost = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.PRODUCT_COST);
+        int idxDeliveredFee = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.DELIVERED_FEE);
+        int idxTip = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.TIP);
+        int idxTotal = cursor.getColumnIndexOrThrow(ScudsbookProvider.OrderInfoColumns.TOTAL);
+        int idxDeliveredBy = cursor.getColumnIndexOrThrow(OrderInfoColumns.DELIVER_BY);
+        int idxOrderTime = cursor.getColumnIndexOrThrow(OrderInfoColumns.ORDER_TIME);
+        int idxSum = cursor.getColumnIndexOrThrow(OrderInfoColumns.SUMMARY);
+
+        info.setId(cursor.getString(idxId));
+        info.setCustomerName(cursor.getString(idxCustomerName));
+        info.setCustomerPhone(cursor.getString(idxCustomerPhone));
+        info.setDistance(cursor.getString(idxDistance));
+        info.setAddress(cursor.getString(idxAddress));
+        info.setCity(cursor.getString(idxCity));
+        info.setState(cursor.getString(idxState));
+        info.setZip(cursor.getString(idxZip));
+        info.setProductCost(cursor.getString(idxProductCost));
+        info.setDeliverFee(cursor.getString(idxDeliveredFee));
+        info.setTip(cursor.getString(idxTip));
+        info.setTotal(cursor.getString(idxTotal));
+        info.setDeliverBy(cursor.getString(idxDeliveredBy));
+        info.setOrderTime(cursor.getString(idxOrderTime));
+        info.setOrderSum(cursor.getString(idxSum));
+    }
 }

@@ -2,8 +2,11 @@ package com.example.ye1chen.scudsbook_deliver_client.mainpage;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,9 +16,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.ye1chen.scudsbook_deliver_client.HttpConnection;
+import com.example.ye1chen.scudsbook_deliver_client.Object.OrderInfo;
 import com.example.ye1chen.scudsbook_deliver_client.R;
 import com.example.ye1chen.scudsbook_deliver_client.ScudsbookConstants;
 import com.example.ye1chen.scudsbook_deliver_client.UserInfo;
+import com.example.ye1chen.scudsbook_deliver_client.database.ScudsbookDba;
 import com.example.ye1chen.scudsbook_deliver_client.location.LocationDetector;
 import com.example.ye1chen.scudsbook_deliver_client.orderpage.ManagerAddNewOrder;
 import com.example.ye1chen.scudsbook_deliver_client.orderpage.OrderPage;
@@ -26,6 +31,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -41,8 +47,23 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
     private LinearLayout mMapView;
     private MapFragment mapFragment;
     private GoogleMap mMap;
+    MainListAdapter mAdapter;
     private static final int DEFAULT_ZOOM_LEVEL = 13;
     private static final int DEFAULT_MAP_ANIMATION_DURATION = 1000;
+
+    private ContentObserver mDbObserver = new ContentObserver(new Handler()) {
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            mAdapter.setData((ArrayList<OrderInfo>) ScudsbookDba.getDB().getAllOrder(getContentResolver()));
+            mAdapter.notifiListUpdate();
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            onChange(selfChange, null);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +84,14 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(adapter);
         mSpinner.setOnItemSelectedListener(this);
+        mSpinner.setSelection(1);
     }
 
     private void setListView() {
         mListView = (ListView) findViewById(R.id.lv_main_page);
-        MainListAdapter mAdapter = new MainListAdapter(this);
+        mAdapter = new MainListAdapter(this);
+        ArrayList<OrderInfo> infoList = (ArrayList<OrderInfo>) ScudsbookDba.getDB().getAllOrder(getContentResolver());
+        mAdapter.setData(infoList);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
     }

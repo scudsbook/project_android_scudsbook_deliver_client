@@ -55,6 +55,9 @@ public class ScudsbookProvider extends ContentProvider {
         String DELIVERED_FEE = "delivered_fee";
         String TIP = "tip";
         String TOTAL = "total";
+        String DELIVER_BY = "deliver_by";
+        String ORDER_TIME = "order_time";
+        String SUMMARY = "summary";
     }
 
     @Override
@@ -182,10 +185,14 @@ public class ScudsbookProvider extends ContentProvider {
                     + OrderInfoColumns.DISTANCE + " VARCHAR, " + OrderInfoColumns.ADDRESS
                     + " VARCHAR, " + OrderInfoColumns.CITY + " VARCHAR, "
                     + OrderInfoColumns.ZIP + " VARCHAR, "
+                    + OrderInfoColumns.STATE + " VARCHAR, "
                     + OrderInfoColumns.PRODUCT_COST + " VARCHAR, "
                     + OrderInfoColumns.DELIVERED_FEE + " VARCHAR, "
                     + OrderInfoColumns.TIP + " VARCHAR, "
-                    + OrderInfoColumns.TOTAL + " VARCHAR);");
+                    + OrderInfoColumns.TOTAL + " VARCHAR,"
+                    + OrderInfoColumns.DELIVER_BY + " VARCHAR,"
+                    + OrderInfoColumns.ORDER_TIME + " VARCHAR,"
+                    + OrderInfoColumns.SUMMARY + " VARCHAR);");
         }
 
         @Override

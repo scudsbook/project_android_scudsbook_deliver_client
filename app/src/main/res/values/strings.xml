@@ -28,6 +28,11 @@
 
     <!-- Order detial strings -->
     <string name="order_title">Order Information</string>
+    <string name="text_deliver_by">Delivered By :&#160;</string>
+    <string name="products">Products</string>
+    <string name="deliver">Deliver</string>
+    <string name="tips">Tips</string>
+    <string name="deliver_no_set">No deliver set to this order!</string>
 
     <!-- New Order Page -->
     <string name="new_order_title">Add New Order</string>
@@ -43,4 +48,5 @@
     <string name="tip">Tip</string>
     <string name="total">Total</string>
     <string name="add_submit">Submit</string>
+    <string name="no_item_info">Please input all missing blank!</string>
 </resources>

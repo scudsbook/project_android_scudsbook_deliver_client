@@ -252,6 +252,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:inputType="numberDecimal"
+                    android:nextFocusDown="@+id/ed_order_summary"
                     android:scrollHorizontally="true" />
             </TableRow>
 
@@ -282,6 +283,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/divid_alarm_1" />
+
+            <TableRow>
+
+                <EditText
+                    android:id="@+id/ed_order_summary"
+                    style="@style/add_order_text_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
             <Button
                 android:id="@+id/bt_submit"
                 android:layout_width="match_parent"

@@ -17,6 +17,9 @@ public class OrderInfo {
     private String mDeliverFee;
     private String mTip;
     private String mTotal;
+    private String mDeliverBy;
+    private String mOrderSum;
+    private String mOrderTime;
 
     public void setId(String id) {
         mId = id;
@@ -62,6 +65,18 @@ public class OrderInfo {
 
     public void setTotal(String total) {
         mTotal = total;
+    }
+
+    public void setDeliverBy(String by) {
+        mDeliverBy = by;
+    }
+
+    public void setOrderSum(String sum) {
+        mOrderSum = sum;
+    }
+
+    public void setOrderTime(String time) {
+        mOrderTime = time;
     }
 
     public String getId() {
@@ -110,5 +125,17 @@ public class OrderInfo {
 
     public String getTotal() {
         return mTotal;
+    }
+
+    public String getDeliverBy() {
+        return mDeliverBy;
+    }
+
+    public String getOrderSum() {
+        return mOrderSum;
+    }
+
+    public String getOrderTime() {
+        return mOrderTime;
     }
 }

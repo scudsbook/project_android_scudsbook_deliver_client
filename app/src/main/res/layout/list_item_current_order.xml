@@ -9,8 +9,8 @@
         style="@style/order_text_style"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:gravity="center"
-        android:text="Delivering by Ye Chen"
-        android:id="@+id/textView8" />
+        android:text="@string/deliver_no_set"
+        android:id="@+id/tv_order_op" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -23,18 +23,16 @@
             android:layout_height="wrap_content"
             style="@style/order_text_style"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="# 999999"
             android:layout_weight="1"
-            android:id="@+id/textView2" />
+            android:id="@+id/tv_order_id" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             style="@style/order_text_style"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="04/28/2016 14:00 ~ 14:30"
             android:layout_weight="2"
-            android:id="@+id/textView3" />
+            android:id="@+id/tv_order_time" />
     </LinearLayout>
 
     <LinearLayout
@@ -48,27 +46,24 @@
             android:layout_height="wrap_content"
             style="@style/order_text_style"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Xiaohui Hu"
             android:layout_weight="1"
-            android:id="@+id/textView4" />
+            android:id="@+id/tv_customer_name" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             style="@style/order_text_style"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="7738226821"
             android:layout_weight="1"
-            android:id="@+id/textView5" />
+            android:id="@+id/tv_order_phone" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             style="@style/order_text_style"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="5.1 miles"
             android:layout_weight="1"
-            android:id="@+id/textView6" />
+            android:id="@+id/tv_distance" />
     </LinearLayout>
 
     <TextView
@@ -76,13 +71,11 @@
         android:layout_height="wrap_content"
         style="@style/order_text_style"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="14418 29th road, flushing 11254"
-        android:id="@+id/textView7" />
+        android:id="@+id/tv_address" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/order_text_style"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="$54(Products) + $5.34(Deliver) + $5.4(Tips) = $64.74"
-        android:id="@+id/textView9" />
+        android:id="@+id/tv_order_total" />
 </LinearLayout>
