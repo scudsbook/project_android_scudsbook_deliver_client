@@ -1,6 +1,7 @@
 package com.example.ye1chen.scudsbook_deliver_client.orderpage;
 
 import android.app.Activity;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -10,9 +11,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.ye1chen.scudsbook_deliver_client.HttpConnection;
 import com.example.ye1chen.scudsbook_deliver_client.Object.OrderInfo;
 import com.example.ye1chen.scudsbook_deliver_client.R;
+import com.example.ye1chen.scudsbook_deliver_client.ScudsbookConstants;
+import com.example.ye1chen.scudsbook_deliver_client.ScudsbookUtil;
+import com.example.ye1chen.scudsbook_deliver_client.UserInfo;
+import com.example.ye1chen.scudsbook_deliver_client.database.ScudsbookDbUtil;
 import com.example.ye1chen.scudsbook_deliver_client.database.ScudsbookDba;
+
+import java.util.HashMap;
 
 /**
  * Created by ye1.chen on 7/12/16.
@@ -115,22 +123,22 @@ public class ManagerAddNewOrder extends Activity implements View.OnClickListener
         mSummary = (EditText) findViewById(R.id.ed_order_summary);
     }
 
-    private int calTotal(String a, String b, String c) {
-        int total = 0;
-        int v1,v2,v3;
+    private double calTotal(String a, String b, String c) {
+        double total = 0;
+        double v1,v2,v3;
         try {
             if(TextUtils.isEmpty(a))
                 v1 = 0;
             else
-                v1 = Integer.parseInt(a);
+                v1 = Double.parseDouble(a);
             if(TextUtils.isEmpty(b))
                 v2 = 0;
             else
-                v2 = Integer.parseInt(b);
+                v2 = Double.parseDouble(b);
             if(TextUtils.isEmpty(c))
                 v3 = 0;
             else
-                v3 = Integer.parseInt(c);
+                v3 = Double.parseDouble(c);
             total = v1 + v2 + v3;
         } catch (Exception e) {
             total = 0;
@@ -188,7 +196,22 @@ public class ManagerAddNewOrder extends Activity implements View.OnClickListener
             } else {
                 ScudsbookDba.getDB().updateAAProfile(getContentResolver(), info);
             }
+            new Thread(new OderInfoUpdateTask(info)).start();
             this.finish();
+        }
+    }
+
+    private class OderInfoUpdateTask implements Runnable {
+        OrderInfo info;
+
+        public OderInfoUpdateTask(OrderInfo info) {
+            this.info = info;
+        }
+        @Override
+        public void run() {
+            HashMap<String, String> mMap = new HashMap<>();
+            ScudsbookUtil.transferInfoToMap(ManagerAddNewOrder.this, mMap, info);
+            HttpConnection.postRequest(mMap,5000,5000);
         }
     }
 }

@@ -20,11 +20,30 @@ public class ScudsbookConstants {
     public static final String location_lat = "_location_lat";
     public static final String location_lan = "_location_lan";
 
+    // Server database key type
     public static final String type_user_request = "user_request";
     public static final String type_location_update = "location_update";
     public static final String type_admin_key = "user_admin_key";
     public static final String type_location_query = "location_query";
+    public static final String type_order_info_update = "order_info_update";
 
     public static final String admin_key = "admin_key";
     public static final String non_admin_key = "non_admin_key";
+
+    // Server database key - order info
+    public static final String key_order_info_id = "key_order_info_id";
+    public static final String key_order_info_customer_name = "key_order_info_customer_name";
+    public static final String key_order_info_customer_phone = "key_order_info_customer_phone";
+    public static final String key_order_info_distance = "key_order_info_distance";
+    public static final String key_order_info_address = "key_order_info_address";
+    public static final String key_order_info_city = "key_order_info_city";
+    public static final String key_order_info_state = "key_order_info_state";
+    public static final String key_order_info_zip = "key_order_info_zip";
+    public static final String key_order_info_product_cost = "key_order_info_product_cost";
+    public static final String key_order_info_deliver_fee = "key_order_info_deliver_fee";
+    public static final String key_order_info_tip = "key_order_info_tip";
+    public static final String key_order_info_total = "key_order_info_total";
+    public static final String key_order_info_deliver_by = "key_order_info_deliver_by";
+    public static final String key_order_info_order_summary = "key_order_info_summary";
+    public static final String key_order_info_order_time = "key_order_info_time";
 }

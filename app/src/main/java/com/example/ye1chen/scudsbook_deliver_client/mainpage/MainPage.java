@@ -102,6 +102,7 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
                 startActivity(new Intent(MainPage.this, ManagerAddNewOrder.class));
                 break;
             case 1:
+                //default page
                 setViewVisible(true,false);
                 break;
             case 2:
@@ -122,7 +123,9 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startActivity(new Intent(MainPage.this, OrderPage.class));
+        Intent intent = new Intent(MainPage.this, OrderPage.class);
+        intent.putExtra(OrderPage.INTENT_EXTRA_KEY_ORDER_ID, ((OrderInfo) mAdapter.getItem(position)).getId());
+        startActivity(intent);
     }
 
     private void setViewVisible(boolean listStae, boolean mapState) {

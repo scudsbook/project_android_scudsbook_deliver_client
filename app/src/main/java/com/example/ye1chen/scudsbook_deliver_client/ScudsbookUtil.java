@@ -9,6 +9,7 @@ import com.example.ye1chen.scudsbook_deliver_client.Object.OrderInfo;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 
 /**
  * Created by ye1.chen on 7/20/16.
@@ -60,5 +61,29 @@ public class ScudsbookUtil {
                 + "$" + tip + "(" + context.getResources().getString(R.string.tip) + ')' + " = "
                 + "$" + total;
         return temp;
+    }
+
+    public static HashMap<String,String> transferInfoToMap(Context context, HashMap<String,String> hashMap, OrderInfo info) {
+        hashMap.put(ScudsbookConstants.key_scudsbook, context.getResources().getString(R.string.key_connection));
+        hashMap.put(ScudsbookConstants.key_type, ScudsbookConstants.type_order_info_update);
+        hashMap.put(ScudsbookConstants.user_name, UserInfo.getInstance(context).getUserName());
+
+        hashMap.put(ScudsbookConstants.key_order_info_id, info.getId());
+        hashMap.put(ScudsbookConstants.key_order_info_customer_name, info.getCustomerName());
+        hashMap.put(ScudsbookConstants.key_order_info_customer_phone, info.getCustomerPhone());
+        hashMap.put(ScudsbookConstants.key_order_info_distance, info.getDistance());
+        hashMap.put(ScudsbookConstants.key_order_info_address, info.getAddress());
+        hashMap.put(ScudsbookConstants.key_order_info_city, info.getCity());
+        hashMap.put(ScudsbookConstants.key_order_info_state, info.getState());
+        hashMap.put(ScudsbookConstants.key_order_info_zip, info.getZip());
+        hashMap.put(ScudsbookConstants.key_order_info_product_cost, info.getProductCost());
+        hashMap.put(ScudsbookConstants.key_order_info_deliver_fee, info.getDeliverFee());
+        hashMap.put(ScudsbookConstants.key_order_info_tip, info.getTip());
+        hashMap.put(ScudsbookConstants.key_order_info_total, info.getTotal());
+        hashMap.put(ScudsbookConstants.key_order_info_deliver_by, info.getDeliverBy());
+        hashMap.put(ScudsbookConstants.key_order_info_order_summary, info.getOrderSum());
+        hashMap.put(ScudsbookConstants.key_order_info_order_time, info.getOrderTime());
+
+        return hashMap;
     }
 }
