@@ -1,6 +1,7 @@
 package com.example.ye1chen.scudsbook_deliver_client.orderpage;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.Editable;
@@ -43,6 +44,7 @@ public class ManagerAddNewOrder extends Activity implements View.OnClickListener
     private Button mSubmit;
 
     private String profileEditId;
+    private ProgressDialog mProgressDialog;
 
     public static final String INTENT_TYPE_EDIT = "add_new_order_intent_type_edit";
 
@@ -161,6 +163,8 @@ public class ManagerAddNewOrder extends Activity implements View.OnClickListener
         String city = mCity.getText().toString();
         String state = mState.getText().toString();
         String zip = mZip.getText().toString();
+        String productCost = mProductCost.getText().toString();
+        String deliverFee = mDeliverFee.getText().toString();
         String tip = mTip.getText().toString();
         String total = mTotal.getText().toString();
         String summary = mSummary.getText().toString();
@@ -168,7 +172,7 @@ public class ManagerAddNewOrder extends Activity implements View.OnClickListener
         if (TextUtils.isEmpty(customerName) || TextUtils.isEmpty(customerPhone)
                 || TextUtils.isEmpty(distance) || TextUtils.isEmpty(address) || TextUtils.isEmpty(city)
                 || TextUtils.isEmpty(state) || TextUtils.isEmpty(zip) || TextUtils.isEmpty(tip)
-                || TextUtils.isEmpty(total) || TextUtils.isEmpty(summary)) {
+                || TextUtils.isEmpty(productCost) || TextUtils.isEmpty(deliverFee) || TextUtils.isEmpty(total) || TextUtils.isEmpty(summary)) {
             Toast.makeText(this,
                     getResources().getString(R.string.no_item_info),
                     Toast.LENGTH_LONG).show();
@@ -187,17 +191,38 @@ public class ManagerAddNewOrder extends Activity implements View.OnClickListener
             info.setCity(city);
             info.setState(state);
             info.setZip(zip);
+            info.setProductCost(productCost);
+            info.setDeliverFee(deliverFee);
             info.setTip(tip);
             info.setTotal(total);
             info.setOrderSum(summary);
+            info.setDeliverBy(ScudsbookConstants.ORDER_INFO_DELIVERBY_NOT_SET);
 
+            /*
             if (TextUtils.isEmpty(profileEditId)) {
                 ScudsbookDba.getDB().saveOrderInfo(getContentResolver(), info);
             } else {
                 ScudsbookDba.getDB().updateAAProfile(getContentResolver(), info);
-            }
+            }*/
+
+            ScudsbookDba.table_size += 1;
+            info.setId(String.valueOf(ScudsbookDba.table_size));
+            showProgressBar(false);
             new Thread(new OderInfoUpdateTask(info)).start();
-            this.finish();
+        }
+    }
+
+    private void showProgressBar(boolean cancelable) {
+        mProgressDialog = new ProgressDialog(ManagerAddNewOrder.this);
+        mProgressDialog.setCancelable(cancelable);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.show();
+    }
+
+    private void dismissProgressBar() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+            mProgressDialog = null;
         }
     }
 
@@ -212,6 +237,13 @@ public class ManagerAddNewOrder extends Activity implements View.OnClickListener
             HashMap<String, String> mMap = new HashMap<>();
             ScudsbookUtil.transferInfoToMap(ManagerAddNewOrder.this, mMap, info);
             HttpConnection.postRequest(mMap,5000,5000);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    dismissProgressBar();
+                    ManagerAddNewOrder.this.finish();
+                }
+            });
         }
     }
 }

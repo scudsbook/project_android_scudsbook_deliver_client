@@ -31,25 +31,20 @@ public class HttpConnection {
     public static String postRequest(HashMap<String, String> postDataParams, int readTimeout, int connectTimeout) {
         String response = "";
         try {
+            byte[] postDataBytes = getPostDataString(postDataParams).getBytes("UTF-8");
             URL url = new URL(URL_SERVER);
 
             HttpURLConnection httpUrlConnection = (HttpURLConnection) url.openConnection();
-            httpUrlConnection.setChunkedStreamingMode(0);
             httpUrlConnection.setReadTimeout(readTimeout);
             httpUrlConnection.setConnectTimeout(connectTimeout);
             httpUrlConnection.setDoInput(true);
             httpUrlConnection.setDoOutput(true);
+            httpUrlConnection.setInstanceFollowRedirects( false );
             httpUrlConnection.setRequestMethod("POST");
+            httpUrlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            httpUrlConnection.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+            httpUrlConnection.getOutputStream().write(postDataBytes);
             httpUrlConnection.connect();
-
-            OutputStream os = httpUrlConnection.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, "UTF-8"));
-            writer.write(getPostDataString(postDataParams));
-
-            writer.flush();
-            writer.close();
-            os.close();
             int responseCode=httpUrlConnection.getResponseCode();
 
             if (responseCode == HttpsURLConnection.HTTP_OK) {

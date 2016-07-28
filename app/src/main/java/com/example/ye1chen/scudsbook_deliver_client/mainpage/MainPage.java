@@ -19,6 +19,7 @@ import com.example.ye1chen.scudsbook_deliver_client.HttpConnection;
 import com.example.ye1chen.scudsbook_deliver_client.Object.OrderInfo;
 import com.example.ye1chen.scudsbook_deliver_client.R;
 import com.example.ye1chen.scudsbook_deliver_client.ScudsbookConstants;
+import com.example.ye1chen.scudsbook_deliver_client.ScudsbookUtil;
 import com.example.ye1chen.scudsbook_deliver_client.UserInfo;
 import com.example.ye1chen.scudsbook_deliver_client.database.ScudsbookDba;
 import com.example.ye1chen.scudsbook_deliver_client.location.LocationDetector;
@@ -55,8 +56,7 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
-            mAdapter.setData((ArrayList<OrderInfo>) ScudsbookDba.getDB().getAllOrder(getContentResolver()));
-            mAdapter.notifiListUpdate();
+            updateListView();
         }
 
         @Override
@@ -77,6 +77,13 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateListView();
+        resetSpinner();
+    }
+
     private void setSpinner() {
         mSpinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -90,8 +97,7 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
     private void setListView() {
         mListView = (ListView) findViewById(R.id.lv_main_page);
         mAdapter = new MainListAdapter(this);
-        ArrayList<OrderInfo> infoList = (ArrayList<OrderInfo>) ScudsbookDba.getDB().getAllOrder(getContentResolver());
-        mAdapter.setData(infoList);
+        mAdapter.setData(null);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
     }
@@ -198,5 +204,34 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
             });
             futureTask = mExecutor.schedule(new LocationUpdateTask(), delay, TimeUnit.MILLISECONDS);
         }
+    }
+
+    private class OrderInfoListQuery implements Runnable {
+
+        @Override
+        public void run() {
+            final ArrayList<OrderInfo> list = ScudsbookUtil.getOrderInfoListFromServer(MainPage.this);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ScudsbookDba.table_size = list.size();
+                    mAdapter.setData(list);
+                    mAdapter.notifiListUpdate();
+                }
+            });
+        }
+    }
+
+    private void updateListView() {
+        new Thread(new OrderInfoListQuery()).start();
+        //ArrayList<OrderInfo> list = (ArrayList<OrderInfo>) ScudsbookDba.getDB().getAllOrder(getContentResolver());
+        //ScudsbookDba.table_size = list.size();
+        //mAdapter.setData(list);
+        //mAdapter.notifiListUpdate();
+    }
+
+    private void resetSpinner() {
+        if(mSpinner.getSelectedItemPosition() != 3)
+            mSpinner.setSelection(1);
     }
 }

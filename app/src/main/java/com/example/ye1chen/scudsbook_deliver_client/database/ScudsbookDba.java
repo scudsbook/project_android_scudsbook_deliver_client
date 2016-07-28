@@ -24,6 +24,8 @@ public class ScudsbookDba {
 
     public static String ID_SELECTION = BaseColumns._ID + "=?";
 
+    public static int table_size = 0;
+
     public static ScudsbookDba getDB() {
         if (mDba == null)
             mDba = new ScudsbookDba();

@@ -9,6 +9,7 @@ import com.example.ye1chen.scudsbook_deliver_client.Object.OrderInfo;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -85,5 +86,41 @@ public class ScudsbookUtil {
         hashMap.put(ScudsbookConstants.key_order_info_order_time, info.getOrderTime());
 
         return hashMap;
+    }
+
+    public static ArrayList<OrderInfo> getOrderInfoListFromServer(Context context) {
+        ArrayList<OrderInfo> list = new ArrayList<>();
+        HashMap<String,String> hashMap = new HashMap<>();
+        hashMap.put(ScudsbookConstants.key_scudsbook, context.getResources().getString(R.string.key_connection));
+        hashMap.put(ScudsbookConstants.key_type, ScudsbookConstants.type_manager_order_info_list_query);
+        hashMap.put(ScudsbookConstants.user_name, UserInfo.getInstance(context).getUserName());
+        String respond = HttpConnection.postRequest(hashMap,5000,5000);
+        if (TextUtils.isEmpty(respond))
+            return list;
+
+        String[] orderInfoList = respond.split("[}]");
+        for(int i = 0; i<orderInfoList.length; i++) {
+            if(TextUtils.isEmpty(orderInfoList[i]))
+                continue;
+            String[] item = orderInfoList[i].split(";");
+            OrderInfo info = new OrderInfo();
+            info.setId(item[0]);
+            info.setCustomerName(item[1]);
+            info.setCustomerPhone(item[2]);
+            info.setDistance(item[3]);
+            info.setAddress(item[4]);
+            info.setCity(item[5]);
+            info.setState(item[6]);
+            info.setZip(item[7]);
+            info.setProductCost(item[8]);
+            info.setDeliverFee(item[9]);
+            info.setTip(item[10]);
+            info.setTotal(item[11]);
+            info.setDeliverBy(item[12]);
+            info.setOrderSum(item[13]);
+            info.setOrderTime(item[14]);
+            list.add(info);
+        }
+        return list;
     }
 }
