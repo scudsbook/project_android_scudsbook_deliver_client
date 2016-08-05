@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -24,7 +23,7 @@ import com.example.ye1chen.scudsbook_deliver_client.UserInfo;
 import com.example.ye1chen.scudsbook_deliver_client.database.ScudsbookDba;
 import com.example.ye1chen.scudsbook_deliver_client.location.LocationDetector;
 import com.example.ye1chen.scudsbook_deliver_client.orderpage.ManagerAddNewOrder;
-import com.example.ye1chen.scudsbook_deliver_client.orderpage.OrderPage;
+import com.example.ye1chen.scudsbook_deliver_client.orderpage.ManagerOrderPage;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -41,7 +40,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by ye1.chen on 4/27/16.
  */
-public class MainPage extends Activity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener, OnMapReadyCallback {
+public class MainManagerPage extends Activity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener, OnMapReadyCallback {
 
     private Spinner mSpinner;
     private ListView mListView;
@@ -72,7 +71,7 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
         setSpinner();
         setListView();
         setMapView();
-        if(!UserInfo.getInstance(this).getManagerCheck()) {
+        if(!UserInfo.getInstance(this).isManagerManager()) {
             LocationDetector.getInstance(this).startLocationUpdate();
         }
     }
@@ -105,7 +104,7 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
             case 0:
-                startActivity(new Intent(MainPage.this, ManagerAddNewOrder.class));
+                startActivity(new Intent(MainManagerPage.this, ManagerAddNewOrder.class));
                 break;
             case 1:
                 //default page
@@ -129,8 +128,8 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(MainPage.this, OrderPage.class);
-        intent.putExtra(OrderPage.INTENT_EXTRA_KEY_ORDER_ID, ((OrderInfo) mAdapter.getItem(position)).getId());
+        Intent intent = new Intent(MainManagerPage.this, ManagerOrderPage.class);
+        intent.putExtra(ManagerOrderPage.INTENT_EXTRA_KEY_ORDER_ID, ((OrderInfo) mAdapter.getItem(position)).getId());
         startActivity(intent);
     }
 
@@ -138,7 +137,7 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
         mListView.setVisibility(listStae? View.VISIBLE : View.GONE);
         mMapView.setVisibility(mapState? View.VISIBLE : View.GONE);
         if(mapState) {
-            if(!UserInfo.getInstance(this).getManagerCheck()) {
+            if(!UserInfo.getInstance(this).isManagerManager()) {
                 LocationDetector.getInstance(this).startLocationUpdate();
             } else {
                 if (futureTask != null)
@@ -210,7 +209,7 @@ public class MainPage extends Activity implements AdapterView.OnItemSelectedList
 
         @Override
         public void run() {
-            final ArrayList<OrderInfo> list = ScudsbookUtil.getOrderInfoListFromServer(MainPage.this);
+            final ArrayList<OrderInfo> list = ScudsbookUtil.getOrderInfoListFromServerManager(MainManagerPage.this);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

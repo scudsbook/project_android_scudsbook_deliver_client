@@ -39,8 +39,10 @@ import android.widget.Toast;
 import com.example.ye1chen.scudsbook_deliver_client.HttpConnection;
 import com.example.ye1chen.scudsbook_deliver_client.R;
 import com.example.ye1chen.scudsbook_deliver_client.ScudsbookConstants;
+import com.example.ye1chen.scudsbook_deliver_client.ScudsbookUtil;
 import com.example.ye1chen.scudsbook_deliver_client.UserInfo;
-import com.example.ye1chen.scudsbook_deliver_client.mainpage.MainPage;
+import com.example.ye1chen.scudsbook_deliver_client.mainpage.MainDeliverPage;
+import com.example.ye1chen.scudsbook_deliver_client.mainpage.MainManagerPage;
 
 /**
  * A login screen that offers login via email/password.
@@ -65,6 +67,7 @@ public class LogInPage extends AppCompatActivity implements LoaderManager.Loader
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkUserState();
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -345,7 +348,11 @@ public class LogInPage extends AppCompatActivity implements LoaderManager.Loader
             showProgress(false);
 
             if (success) {
-                startActivity(new Intent(mContext, MainPage.class));
+                if(UserInfo.getInstance(mContext).isManagerManager()) {
+                    startActivity(new Intent(mContext, MainManagerPage.class));
+                } else {
+                    startActivity(new Intent(mContext, MainDeliverPage.class));
+                }
             } else {
                 if(TextUtils.equals(respond, ScudsbookConstants.error_security_fail)){
                     Toast.makeText(mContext, mContext.getResources().getString(R.string.security_fail), Toast.LENGTH_LONG).show();
@@ -360,6 +367,17 @@ public class LogInPage extends AppCompatActivity implements LoaderManager.Loader
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
+        }
+    }
+
+    private void checkUserState() {
+        if(ScudsbookUtil.isUserLoggedIn(LogInPage.this)) {
+            if(UserInfo.getInstance(LogInPage.this).isManagerManager()) {
+                startActivity(new Intent(LogInPage.this, MainManagerPage.class));
+            } else {
+                startActivity(new Intent(LogInPage.this, MainDeliverPage.class));
+            }
+            this.finish();
         }
     }
 }

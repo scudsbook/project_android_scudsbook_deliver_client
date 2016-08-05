@@ -33,7 +33,7 @@ public class UserInfo {
         isManager = check;
     }
 
-    public boolean getManagerCheck() {
+    public boolean isManagerManager() {
         return isManager;
     }
 

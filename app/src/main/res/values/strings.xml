@@ -33,6 +33,10 @@
     <string name="deliver">Deliver</string>
     <string name="tips">Tips</string>
     <string name="deliver_no_set">No deliver set to this order!</string>
+    <string name="set_deliver">Deliver this Order</string>
+    <string name="set_deliver_dialog_title">Pick up this Order</string>
+    <string name="set_deliver_dialog_message">Do you want to deliver this order to customer? Click Ok if you want!</string>
+    <string name="set_deliver_by_manager">Set up a Deliver</string>
 
     <!-- New Order Page -->
     <string name="new_order_title">Add New Order</string>

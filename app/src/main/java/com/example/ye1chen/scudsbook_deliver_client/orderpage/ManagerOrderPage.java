@@ -9,12 +9,11 @@ import android.widget.ListView;
 import com.example.ye1chen.scudsbook_deliver_client.Object.OrderInfo;
 import com.example.ye1chen.scudsbook_deliver_client.R;
 import com.example.ye1chen.scudsbook_deliver_client.ScudsbookUtil;
-import com.example.ye1chen.scudsbook_deliver_client.database.ScudsbookDba;
 
 /**
  * Created by ye1.chen on 4/28/16.
  */
-public class OrderPage extends Activity {
+public class ManagerOrderPage extends Activity {
 
     public static final String INTENT_EXTRA_KEY_ORDER_ID = "intent_extra_key_order_id";
 
@@ -35,9 +34,23 @@ public class OrderPage extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        info = ScudsbookDba.getDB().getOrderInfoById(getContentResolver(), orderId);
-        ScudsbookUtil.setUpListItemCurrentOrderView(this, mOrderLout, info);
-        setUpList();
+        //info = ScudsbookDba.getDB().getOrderInfoById(getContentResolver(), orderId);
+        new Thread(new OrderInfoQuery()).start();
+    }
+
+    private class OrderInfoQuery implements Runnable {
+
+        @Override
+        public void run() {
+            info = ScudsbookUtil.getOrderInfoFromServerManager(ManagerOrderPage.this, String.valueOf(orderId));
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ScudsbookUtil.setUpListItemCurrentOrderView(ManagerOrderPage.this, mOrderLout, info);
+                    setUpList();
+                }
+            });
+        }
     }
 
     private void setUpList() {

@@ -20,6 +20,20 @@
         android:layout_height="1dp"
         android:background="@android:color/black"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/set_deliver"
+        android:id="@+id/set_deliver"
+        android:visibility="gone"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/set_deliver_by_manager"
+        android:id="@+id/set_deliver_by_manager"
+        android:visibility="gone"/>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

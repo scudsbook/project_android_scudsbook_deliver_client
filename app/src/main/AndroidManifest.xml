@@ -47,10 +47,15 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".mainpage.MainPage">
+        <activity android:name=".mainpage.MainManagerPage">
 
         </activity>
-        <activity android:name=".orderpage.OrderPage">
+        <activity android:name=".orderpage.ManagerOrderPage">
+        </activity>
+        <activity android:name=".mainpage.MainDeliverPage">
+
+        </activity>
+        <activity android:name=".orderpage.DeliverOrderPage">
         </activity>
 
         <activity android:name=".orderpage.ManagerAddNewOrder"/>

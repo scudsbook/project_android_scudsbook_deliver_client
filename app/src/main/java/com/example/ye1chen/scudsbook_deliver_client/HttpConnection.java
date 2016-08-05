@@ -1,5 +1,6 @@
 package com.example.ye1chen.scudsbook_deliver_client;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
@@ -58,6 +59,9 @@ public class HttpConnection {
                 response="";
             }
             httpUrlConnection.disconnect();
+
+            if(TextUtils.equals(response, "error:no_user"))
+                response="";
         } catch (Exception e) {
             Log.e("HttpConnection", "Error in parsing IMPACT response: \n" + Log.getStackTraceString(e));
         }
