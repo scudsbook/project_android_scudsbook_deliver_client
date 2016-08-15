@@ -353,6 +353,7 @@ public class LogInPage extends AppCompatActivity implements LoaderManager.Loader
                 } else {
                     startActivity(new Intent(mContext, MainDeliverPage.class));
                 }
+                finish();
             } else {
                 if(TextUtils.equals(respond, ScudsbookConstants.error_security_fail)){
                     Toast.makeText(mContext, mContext.getResources().getString(R.string.security_fail), Toast.LENGTH_LONG).show();

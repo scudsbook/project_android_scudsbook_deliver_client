@@ -170,10 +170,39 @@ public class ScudsbookUtil {
         info.setDeliverBy(item[12]);
         info.setOrderSum(item[13]);
         info.setOrderTime(item[14]);
+        info.setSubmitBy(item[15]);
         return info;
     }
 
     public static boolean isUserLoggedIn(Context context) {
-        return TextUtils.isEmpty(UserInfo.getInstance(context).getUserName());
+        return !TextUtils.isEmpty(UserInfo.getInstance(context).getUserName());
+    }
+
+    public static boolean setDeliverByDeliver(Context context, String Order_Id, String Create_by, String Deliver_by) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put(ScudsbookConstants.key_scudsbook, context.getResources().getString(R.string.key_connection));
+        hashMap.put(ScudsbookConstants.key_type, ScudsbookConstants.type_set_deliver_by_deliver);
+        hashMap.put(ScudsbookConstants.user_name, Create_by);
+        hashMap.put(ScudsbookConstants.deliver_by, Deliver_by);
+        hashMap.put(ScudsbookConstants.key_order_info_id, Order_Id);
+        String respond = HttpConnection.postRequest(hashMap, 5000, 5000);
+        if (TextUtils.isEmpty(respond))
+            return false;
+        return true;
+    }
+
+    public static boolean isDeliverSet(OrderInfo info) {
+        return !TextUtils.equals(info.getDeliverBy(), ScudsbookConstants.ORDER_INFO_DELIVERBY_NOT_SET);
+    }
+
+
+    public static String queryUserList(Context context) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put(ScudsbookConstants.key_scudsbook, context.getResources().getString(R.string.key_connection));
+        hashMap.put(ScudsbookConstants.key_type, ScudsbookConstants.type_user_list_query);
+        String respond = HttpConnection.postRequest(hashMap, 5000, 5000);
+        if (TextUtils.isEmpty(respond))
+            return null;
+        return respond;
     }
 }

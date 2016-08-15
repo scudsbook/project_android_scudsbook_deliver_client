@@ -20,6 +20,7 @@ public class OrderInfo {
     private String mDeliverBy;
     private String mOrderSum;
     private String mOrderTime;
+    private String mSubmitBy;
 
     public void setId(String id) {
         mId = id;
@@ -77,6 +78,10 @@ public class OrderInfo {
 
     public void setOrderTime(String time) {
         mOrderTime = time;
+    }
+
+    public void setSubmitBy(String submitBy) {
+        mSubmitBy = submitBy;
     }
 
     public String getId() {
@@ -137,5 +142,9 @@ public class OrderInfo {
 
     public String getOrderTime() {
         return mOrderTime;
+    }
+
+    public String getSubmitBy() {
+        return mSubmitBy;
     }
 }

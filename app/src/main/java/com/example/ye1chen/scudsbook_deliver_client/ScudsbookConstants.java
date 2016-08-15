@@ -16,6 +16,7 @@ public class ScudsbookConstants {
     public static final String key_scudsbook = "_key_scudsbook";
     public static final String key_type = "_key_type";
     public static final String user_name = "_user_name";
+    public static final String deliver_by = "_deliver_by";
     public static final String password = "_password";
     public static final String location_lat = "_location_lat";
     public static final String location_lan = "_location_lan";
@@ -30,6 +31,8 @@ public class ScudsbookConstants {
     public static final String type_manager_order_info_list_query = "manager_order_info_list_query";;
     public static final String type_deliver_order_info_query = "deliver_order_info_query";
     public static final String type_deliver_order_info_list_query = "deliver_order_info_list_query";
+    public static final String type_set_deliver_by_deliver = "set_deliver_by_deliver";
+    public static final String type_user_list_query = "user_list_query";
 
     public static final String admin_key = "admin_key";
     public static final String non_admin_key = "non_admin_key";

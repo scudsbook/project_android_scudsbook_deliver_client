@@ -4,17 +4,24 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.example.ye1chen.scudsbook_deliver_client.HttpConnection;
 import com.example.ye1chen.scudsbook_deliver_client.Object.OrderInfo;
 import com.example.ye1chen.scudsbook_deliver_client.R;
+import com.example.ye1chen.scudsbook_deliver_client.ScudsbookConstants;
 import com.example.ye1chen.scudsbook_deliver_client.ScudsbookUtil;
+import com.example.ye1chen.scudsbook_deliver_client.UserInfo;
+
+import java.util.HashMap;
 
 /**
  * Created by ye1.chen on 4/28/16.
@@ -25,7 +32,7 @@ public class DeliverOrderPage extends Activity implements View.OnClickListener{
 
     private String orderId;
     private LinearLayout mOrderLout;
-    private OrderInfo info;
+    private static OrderInfo info;
     private ListView mListView;
     private Button mSetUpDeliver;
 
@@ -37,12 +44,15 @@ public class DeliverOrderPage extends Activity implements View.OnClickListener{
         mOrderLout = (LinearLayout) findViewById(R.id.ly_list_item_order);
         mListView = (ListView) findViewById(R.id.item_list);
         mSetUpDeliver = (Button) findViewById(R.id.set_deliver);
-        mSetUpDeliver.setVisibility(View.VISIBLE);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        if(ScudsbookUtil.isDeliverSet(info))
+            mSetUpDeliver.setVisibility(View.GONE);
+        else
+            mSetUpDeliver.setVisibility(View.VISIBLE);
         //info = ScudsbookDba.getDB().getOrderInfoById(getContentResolver(), orderId);
         new Thread(new OrderInfoQuery()).start();
     }
@@ -104,6 +114,8 @@ public class DeliverOrderPage extends Activity implements View.OnClickListener{
                     .setPositiveButton(android.R.string.ok,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
+                                    new Thread(new OderInfoUpdateTask(getActivity())).start();
+                                    getActivity().finish();
                                 }
                             }
                     )
@@ -115,6 +127,19 @@ public class DeliverOrderPage extends Activity implements View.OnClickListener{
                             }
                     )
                     .create();
+        }
+    }
+
+    private static class OderInfoUpdateTask implements Runnable {
+
+        Context mContext;
+
+        public OderInfoUpdateTask(Context context) {
+            this.mContext = context;
+        }
+        @Override
+        public void run() {
+            ScudsbookUtil.setDeliverByDeliver(mContext,info.getId(), info.getSubmitBy(), UserInfo.getInstance(mContext).getUserName());
         }
     }
 }

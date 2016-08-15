@@ -246,4 +246,6 @@ public class ManagerAddNewOrder extends Activity implements View.OnClickListener
             });
         }
     }
+
+
 }
