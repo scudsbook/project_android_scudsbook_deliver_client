@@ -44,15 +44,12 @@ public class DeliverOrderPage extends Activity implements View.OnClickListener{
         mOrderLout = (LinearLayout) findViewById(R.id.ly_list_item_order);
         mListView = (ListView) findViewById(R.id.item_list);
         mSetUpDeliver = (Button) findViewById(R.id.set_deliver);
+        mSetUpDeliver.setOnClickListener(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(ScudsbookUtil.isDeliverSet(info))
-            mSetUpDeliver.setVisibility(View.GONE);
-        else
-            mSetUpDeliver.setVisibility(View.VISIBLE);
         //info = ScudsbookDba.getDB().getOrderInfoById(getContentResolver(), orderId);
         new Thread(new OrderInfoQuery()).start();
     }
@@ -74,6 +71,10 @@ public class DeliverOrderPage extends Activity implements View.OnClickListener{
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    if(ScudsbookUtil.isDeliverSet(info))
+                        mSetUpDeliver.setVisibility(View.GONE);
+                    else
+                        mSetUpDeliver.setVisibility(View.VISIBLE);
                     ScudsbookUtil.setUpListItemCurrentOrderView(DeliverOrderPage.this, mOrderLout, info);
                     setUpList();
                 }
@@ -115,7 +116,6 @@ public class DeliverOrderPage extends Activity implements View.OnClickListener{
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     new Thread(new OderInfoUpdateTask(getActivity())).start();
-                                    getActivity().finish();
                                 }
                             }
                     )
@@ -140,6 +140,12 @@ public class DeliverOrderPage extends Activity implements View.OnClickListener{
         @Override
         public void run() {
             ScudsbookUtil.setDeliverByDeliver(mContext,info.getId(), info.getSubmitBy(), UserInfo.getInstance(mContext).getUserName());
+            ((Activity)mContext).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ((Activity)mContext).finish();
+                }
+            });
         }
     }
 }

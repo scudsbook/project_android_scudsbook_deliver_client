@@ -41,19 +41,12 @@ public class ManagerOrderPage extends Activity implements AdapterView.OnItemSele
         mOrderLout = (LinearLayout) findViewById(R.id.ly_list_item_order);
         mListView = (ListView) findViewById(R.id.item_list);
         mSpinner = (Spinner) findViewById(R.id.set_deliver_by_manager);
+        mSpinner.setOnItemSelectedListener(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        if(ScudsbookUtil.isDeliverSet(info))
-            mSpinner.setVisibility(View.GONE);
-        else {
-            mSpinner.setVisibility(View.VISIBLE);
-            mSpinner.setOnItemSelectedListener(this);
-            new Thread(new QueryUserListTask()).start();
-        }
         //info = ScudsbookDba.getDB().getOrderInfoById(getContentResolver(), orderId);
         new Thread(new OrderInfoQuery()).start();
     }
@@ -76,6 +69,12 @@ public class ManagerOrderPage extends Activity implements AdapterView.OnItemSele
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    if(ScudsbookUtil.isDeliverSet(info))
+                        mSpinner.setVisibility(View.GONE);
+                    else {
+                        mSpinner.setVisibility(View.VISIBLE);
+                        new Thread(new QueryUserListTask()).start();
+                    }
                     ScudsbookUtil.setUpListItemCurrentOrderView(ManagerOrderPage.this, mOrderLout, info);
                     setUpList();
                 }

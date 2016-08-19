@@ -86,11 +86,11 @@ public class MainDeliverPage extends Activity implements AdapterView.OnItemSelec
     private void setSpinner() {
         mSpinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.list_of_view_selector_manager, android.R.layout.simple_spinner_item);
+                R.array.list_of_view_selector_employee, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(adapter);
         mSpinner.setOnItemSelectedListener(this);
-        mSpinner.setSelection(1);
+        mSpinner.setSelection(0);
     }
 
     private void setListView() {
@@ -104,15 +104,12 @@ public class MainDeliverPage extends Activity implements AdapterView.OnItemSelec
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
             case 0:
-                startActivity(new Intent(MainDeliverPage.this, ManagerAddNewOrder.class));
-                break;
-            case 1:
                 //default page
                 setViewVisible(true,false);
                 break;
-            case 2:
+            case 1:
                 break;
-            case 3:
+            case 2:
                 setViewVisible(false,true);
                 break;
             default:
