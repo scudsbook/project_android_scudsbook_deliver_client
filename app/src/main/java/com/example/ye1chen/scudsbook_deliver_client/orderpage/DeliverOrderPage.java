@@ -29,8 +29,10 @@ import java.util.HashMap;
 public class DeliverOrderPage extends Activity implements View.OnClickListener{
 
     public static final String INTENT_EXTRA_KEY_ORDER_ID = "intent_extra_key_order_id";
+    public static final String INTENT_EXTRA_KEY_SUBMIT_USER_ID = "intent_extra_key_submit_user_id";
 
     private String orderId;
+    private String submitUserId;
     private LinearLayout mOrderLout;
     private static OrderInfo info;
     private ListView mListView;
@@ -41,6 +43,7 @@ public class DeliverOrderPage extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_page);
         orderId = getIntent().getStringExtra(INTENT_EXTRA_KEY_ORDER_ID);
+        submitUserId = getIntent().getStringExtra(INTENT_EXTRA_KEY_SUBMIT_USER_ID);
         mOrderLout = (LinearLayout) findViewById(R.id.ly_list_item_order);
         mListView = (ListView) findViewById(R.id.item_list);
         mSetUpDeliver = (Button) findViewById(R.id.set_deliver);
@@ -67,7 +70,7 @@ public class DeliverOrderPage extends Activity implements View.OnClickListener{
 
         @Override
         public void run() {
-            info = ScudsbookUtil.getOrderInfoFromServerDeliver(DeliverOrderPage.this, String.valueOf(orderId));
+            info = ScudsbookUtil.getOrderInfoFromServerDeliver(DeliverOrderPage.this, orderId, submitUserId);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

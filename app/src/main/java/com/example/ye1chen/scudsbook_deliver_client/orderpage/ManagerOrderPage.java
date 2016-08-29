@@ -136,7 +136,6 @@ public class ManagerOrderPage extends Activity implements AdapterView.OnItemSele
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     new Thread(new OderInfoUpdateTask(getActivity(),deliver_by)).start();
-                                    getActivity().finish();
                                 }
                             }
                     )
@@ -164,6 +163,12 @@ public class ManagerOrderPage extends Activity implements AdapterView.OnItemSele
         @Override
         public void run() {
             ScudsbookUtil.setDeliverByDeliver(mContext,orderId, UserInfo.getInstance(mContext).getUserName(),deliver_by);
+            ((Activity)mContext).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ((Activity)mContext).finish();
+                }
+            });
         }
     }
 }

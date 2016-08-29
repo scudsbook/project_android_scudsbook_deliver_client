@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.ye1chen.scudsbook_deliver_client.HttpConnection;
 import com.example.ye1chen.scudsbook_deliver_client.Object.OrderInfo;
@@ -68,6 +69,7 @@ public class MainManagerPage extends Activity implements AdapterView.OnItemSelec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+        ((TextView)findViewById(R.id.tv_current_order_title)).setText(getString(R.string.main_manager_title));
         setSpinner();
         setListView();
         setMapView();

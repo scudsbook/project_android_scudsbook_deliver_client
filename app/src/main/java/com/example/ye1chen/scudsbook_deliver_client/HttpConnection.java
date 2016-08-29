@@ -63,7 +63,7 @@ public class HttpConnection {
             if(TextUtils.equals(response, "error:no_user"))
                 response="";
         } catch (Exception e) {
-            Log.e("HttpConnection", "Error in parsing IMPACT response: \n" + Log.getStackTraceString(e));
+            Log.e("HttpConnection", "Error in parsing IMPACT response: \n" + e.toString());
         }
         return response;
     }

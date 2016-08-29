@@ -140,11 +140,11 @@ public class ScudsbookUtil {
         return transDataToOrderInfo(respond);
     }
 
-    public static OrderInfo getOrderInfoFromServerDeliver(Context context, String Order_Id) {
+    public static OrderInfo getOrderInfoFromServerDeliver(Context context, String Order_Id, String Submit_User_Id) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put(ScudsbookConstants.key_scudsbook, context.getResources().getString(R.string.key_connection));
         hashMap.put(ScudsbookConstants.key_type, ScudsbookConstants.type_deliver_order_info_query);
-        hashMap.put(ScudsbookConstants.user_name, UserInfo.getInstance(context).getUserName());
+        hashMap.put(ScudsbookConstants.user_name, Submit_User_Id);
         hashMap.put(ScudsbookConstants.key_order_info_id, Order_Id);
         String respond = HttpConnection.postRequest(hashMap, 5000, 5000);
         if (TextUtils.isEmpty(respond))

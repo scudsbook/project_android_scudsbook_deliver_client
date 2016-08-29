@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Scudsbook_deliver_client</string>
+    <string name="app_name">Scudsbook</string>
     <string name="title_activity_maps">Map</string>
     <string name="key_connection">1z9kdjhekjndfhjahfuerhianfkjfnakheuroaihn</string>
 
@@ -21,6 +21,7 @@
 
     <!-- Main page strings -->
     <string name="main_title">Employee</string>
+    <string name="main_manager_title">Manager</string>
     <string name="main_add_order">New Order</string>
     <string name="main_current_list">Current Order List</string>
     <string name="main_order_history">Order History</string>

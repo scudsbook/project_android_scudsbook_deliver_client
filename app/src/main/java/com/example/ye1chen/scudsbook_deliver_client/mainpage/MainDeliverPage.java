@@ -127,6 +127,7 @@ public class MainDeliverPage extends Activity implements AdapterView.OnItemSelec
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(MainDeliverPage.this, DeliverOrderPage.class);
         intent.putExtra(DeliverOrderPage.INTENT_EXTRA_KEY_ORDER_ID, ((OrderInfo) mAdapter.getItem(position)).getId());
+        intent.putExtra(DeliverOrderPage.INTENT_EXTRA_KEY_SUBMIT_USER_ID, ((OrderInfo) mAdapter.getItem(position)).getSubmitBy());
         startActivity(intent);
     }
 
